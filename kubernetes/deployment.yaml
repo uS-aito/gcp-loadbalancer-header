@@ -45,3 +45,16 @@ spec:
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8000
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gcplbheader-ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /*
+        backend:
+          serviceName: gcplbheader
+          servicePort: 8000
