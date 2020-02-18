@@ -9,8 +9,10 @@ spec:
   ports:
   - port: 8000
     name: http
+    targetPort: 8000
   selector:
     app: gcplbheader
+  type: NodePort
 ---
 apiVersion: v1
 kind: ServiceAccount
