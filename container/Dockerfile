@@ -1,7 +1,8 @@
 FROM python:3.6.8-slim
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+WORKDIR /root
+
+RUN pip install flask
 
 COPY main.py ./
 EXPOSE 8000

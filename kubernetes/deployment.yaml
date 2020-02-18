@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gcplbheader
+  labels:
+    app: gcplbheader
+    service: gcplbheader
+spec:
+  ports:
+  - port: 8000
+    name: http
+  selector:
+    app: gcplbheader
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gcplbheader
+  labels:
+    account: gcplbheader
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gcplbheader
+  labels:
+    app: gcplbheader
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gcplbheader
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: gcplbheader
+        version: v1
+    spec:
+      serviceAccountName: gcplbheader
+      containers:
+      - name: gcplbheader
+        image: h2so40627/gcplbheader
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
